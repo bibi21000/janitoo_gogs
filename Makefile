@@ -153,6 +153,15 @@ develop: /etc/apt/sources.list.d/gogs.list
 travis-deps: deps
 	sudo apt-get -y install mosquitto wget curl
 	sudo mkdir -p /opt/janitoo/src/janitoo_gogs
+	git clone https://github.com/bibi21000/janitoo_mysql.git
+	make -C janitoo_mysql deps
+	make -C janitoo_mysql develop
+	git clone https://github.com/bibi21000/janitoo_mysql_client.git
+	make -C janitoo_mysql_client deps
+	make -C janitoo_mysql_client develop
+	git clone https://github.com/bibi21000/janitoo_nginx.git
+	make -C janitoo_nginx deps
+	make -C janitoo_nginx develop
 	@echo
 	@echo "Travis dependencies for ${MODULENAME} installed."
 
