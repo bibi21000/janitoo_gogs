@@ -1,21 +1,16 @@
-.. image:: https://travis-ci.org/bibi21000/janitoo_nginx.svg?branch=master
-    :target: https://travis-ci.org/bibi21000/janitoo_nginx
+.. image:: https://travis-ci.org/bibi21000/janitoo_gogs.svg?branch=master
+    :target: https://travis-ci.org/bibi21000/janitoo_gogs
     :alt: Travis status
 
-========================
-Welcome to janitoo_nginx
-========================
+=======================
+Welcome to janitoo_gogs
+=======================
 
-We must install a recent stable version of nginx.
+We must install a git server to serve packages for our rapsberries.
 
-This is the job of this module. It installs packages for Debian, Ubuntu and Raspdebian using method listed here : http://nginx.org/en/linux_packages.html#stable
+This is the job of this module. It installs packages for Debian, Ubuntu and Raspdebian using method listed here : https://gogs.io/docs/installation/install_from_packages.html
 
 Configuration
 =============
 
-Websockets are listen on all addresses on port 9001. This is not secure.
-
-We must use https://www.nginx.com/blog/websocket-nginx/ in production.
-
-mqtt is on 1883.
 
