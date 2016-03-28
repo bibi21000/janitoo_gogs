@@ -149,7 +149,6 @@ develop: /etc/apt/sources.list.d/gogs.list
 	sudo service nginx restart
 	sleep 2
 	-netcat -zv 127.0.0.1 1-9999 2>&1|grep succeeded
-	cat /etc/passwd|grep git
 	@echo
 	@echo "Dependencies for ${MODULENAME} finished."
 
@@ -175,6 +174,7 @@ tests:
 	netcat -zv 127.0.0.1 1-9999 2>&1|grep succeeded|grep 8085
 	-curl -Is http://127.0.0.1:8085/
 	curl -Is http://127.0.0.1:8085/|head -n 1|grep 200
+	cat /etc/passwd|grep git
 	@echo
 	@echo "Tests for ${MODULENAME} finished."
 
