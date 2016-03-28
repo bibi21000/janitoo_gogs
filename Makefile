@@ -138,7 +138,7 @@ endif
 ifeq ($(distro),Ubuntu)
 	sudo apt-get -y -yy install gogs=$(gogsversion).$(codename)
 endif
-	adduser --disabled-password --home /opt/git --gecos "Git user" git
+	sudo adduser --disabled-password --home /opt/git --gecos "Git user" git
 	sudo mkdir -p /var/log/gogs
 
 develop: /etc/apt/sources.list.d/gogs.list
