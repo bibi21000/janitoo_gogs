@@ -46,7 +46,7 @@ distro = $(shell lsb_release -a 2>/dev/null|grep Distributor|cut -f2 -d ":"|sed 
 release = $(shell lsb_release -a 2>/dev/null|grep Release|cut -f2 -d ":"|sed -e "s/\t//g" )
 codename = $(shell lsb_release -a 2>/dev/null|grep Codename|cut -f2 -d ":"|sed -e "s/\t//g" )
 
-gogsversion = 0.8.43-1457297356.12b5a76
+gogsversion = 0.9.13-1458763757.5ec8ef0
 
 -include Makefile.local
 
