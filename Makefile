@@ -131,12 +131,12 @@ endif
 ifeq ($(distro),Ubuntu)
 	echo "deb https://deb.packager.io/gh/pkgr/gogs $(codename) pkgr" | sudo tee /etc/apt/sources.list.d/gogs.list
 endif
-	sudo apt-get update -y
+	sudo apt-get update -y -yy
 ifeq ($(distro),Debian)
-	sudo apt-get install gogs=$(gogsversion).$(codename)
+	sudo apt-get -y -yy install gogs=$(gogsversion).$(codename)
 endif
 ifeq ($(distro),Ubuntu)
-	sudo apt-get install gogs=$(gogsversion).$(codename)
+	sudo apt-get -y -yy install gogs=$(gogsversion).$(codename)
 endif
 
 develop: /etc/apt/sources.list.d/gogs.list
