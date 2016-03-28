@@ -140,6 +140,7 @@ ifeq ($(distro),Ubuntu)
 endif
 	sudo adduser --disabled-password --home /opt/git --gecos "Git user" git
 	sudo mkdir -p /var/log/gogs
+	#To continue : https://gogs.io/docs/advanced/configuration_cheat_sheet
 
 develop: /etc/apt/sources.list.d/gogs.list
 	@echo
