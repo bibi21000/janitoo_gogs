@@ -133,10 +133,10 @@ ifeq ($(distro),Ubuntu)
 endif
 	sudo apt-get update -y
 ifeq ($(distro),Debian)
-	sudo apt-get install gogs\*=$(gogsversion).$(codename)
+	sudo apt-get install gogs=$(gogsversion).$(codename)
 endif
 ifeq ($(distro),Ubuntu)
-	sudo apt-get install gogs\*=$(gogsversion).$(codename)
+	sudo apt-get install gogs=$(gogsversion).$(codename)
 endif
 
 develop: /etc/apt/sources.list.d/gogs.list
