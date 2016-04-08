@@ -35,7 +35,7 @@ endif
 
 MODULENAME   = $(shell basename `pwd`)
 
-NOSECOVER     = --cover-package=janitoo,janitoo_db,${MODULENAME} --cover-min-percentage= --with-coverage --cover-inclusive --cover-tests --cover-html --cover-html-dir=${BUILDDIR}/docs/html/tools/coverage --with-html --html-file=${BUILDDIR}/docs/html/tools/nosetests/index.html
+NOSECOVER     = --cover-package=janitoo,janitoo_db,${MODULENAME} --cover-min-percentage= --with-coverage --cover-inclusive --cover-html --cover-html-dir=${BUILDDIR}/docs/html/tools/coverage --with-html --html-file=${BUILDDIR}/docs/html/tools/nosetests/index.html
 
 DEBIANDEPS := $(shell [ -f debian.deps ] && cat debian.deps)
 BOWERDEPS := $(shell [ -f bower.deps ] && cat bower.deps)
@@ -50,7 +50,7 @@ gogsversion = 0.9.13-1458763757.5ec8ef0
 
 -include Makefile.local
 
-.PHONY: help check-tag clean all build develop install uninstall clean-doc doc certification tests pylint deps
+.PHONY: help check-tag clean all build develop install uninstall clean-doc doc certification tests pylint deps docker-tests
 
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
@@ -168,14 +168,22 @@ travis-deps: deps
 	@echo
 	@echo "Travis dependencies for ${MODULENAME} installed."
 
+docker-inst:
+	@echo "Configure Docker image."
+	@echo
+
+docker-tests: tests
+	@echo
+	@echo "Docker tests for ${MODULENAME} finished."
+
 tests:
-	netcat -zv 127.0.0.1 1-9999 2>&1|grep succeeded|grep 3000
-	-curl -Is http://127.0.0.1:3000/
+	netcat -zv 127.0.0.1 1-9999 2>&1|grep succeeded
+	#~ -curl -Is http://127.0.0.1:3000/
 	#~ curl -Is http://127.0.0.1:3000/|head -n 1|grep 200
-	netcat -zv 127.0.0.1 1-9999 2>&1|grep succeeded|grep 8085
-	-curl -Is http://127.0.0.1:8085/
-	curl -Is http://127.0.0.1:8085/|head -n 1|grep 200
-	cat /etc/passwd|grep git
+	#~ netcat -zv 127.0.0.1 1-9999 2>&1|grep succeeded|grep 8085
+	#~ -curl -Is http://127.0.0.1:8085/
+	#~ curl -Is http://127.0.0.1:8085/|head -n 1|grep 200
+	#~ cat /etc/passwd|grep git
 	@echo
 	@echo "Tests for ${MODULENAME} finished."
 
