@@ -22,3 +22,7 @@ Documentation
 =============
 You can browse online documentation here : https://bibi21000.github.io/janitoo_gogs/.
 
+Tutorial
+========
+You can find a tutorial here : https://bibi21000.github.io/janitoo_tutorial/.
+
