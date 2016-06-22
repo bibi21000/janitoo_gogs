@@ -35,6 +35,8 @@ endif
 
 MODULENAME   = $(shell basename `pwd`)
 DOCKERNAME   = $(shell echo ${MODULENAME}|sed -e "s|janitoo_||g")
+DOCKERVOLS   =
+DOCKERPORT   = 8882
 
 NOSECOVER     = --cover-package=janitoo,janitoo_db,${MODULENAME} --cover-min-percentage= --with-coverage --cover-inclusive --cover-html --cover-html-dir=${BUILDDIR}/docs/html/tools/coverage --with-html --html-file=${BUILDDIR}/docs/html/tools/nosetests/index.html
 
@@ -238,7 +240,7 @@ docker-local-pull:
 docker-local-store: docker-local-pull
 	@echo
 	@echo "Create docker local store for ${MODULENAME}."
-	docker create -v /root/.ssh/ -v /opt/janitoo/etc/ --name ${DOCKERNAME}_store bibi21000/${MODULENAME} /bin/true
+	docker create -v /root/.ssh/ -v /opt/janitoo/etc/ ${DOCKERVOLS} --name ${DOCKERNAME}_store bibi21000/${MODULENAME} /bin/true
 	@echo
 	@echo "Docker local store for ${MODULENAME} created."
 
@@ -247,21 +249,20 @@ docker-local-running: docker-local-pull
 	@echo "Update local docker for ${MODULENAME}."
 	-docker stop ${DOCKERNAME}_running
 	-docker rm ${DOCKERNAME}_running
-	docker create --volumes-from ${DOCKERNAME}_store -p 8885:22 --name ${DOCKERNAME}_running bibi21000/${MODULENAME}
+	docker create --volumes-from ${DOCKERNAME}_store -p ${DOCKERPORT}:22 --name ${DOCKERNAME}_running bibi21000/${MODULENAME}
 	docker ps -a|grep ${DOCKERNAME}_running
 	docker start ${DOCKERNAME}_running
 	docker ps|grep ${DOCKERNAME}_running
 	@echo
 	@echo "Docker local for ${MODULENAME} updated."
-	@echo "Docker tests for ${MODULENAME} finished."
 
 tests:
 	netcat -zv 127.0.0.1 1-9999 2>&1|grep succeeded
 	#~ -curl -Is http://127.0.0.1:3000/
 	#~ curl -Is http://127.0.0.1:3000/|head -n 1|grep 200
-	#~ netcat -zv 127.0.0.1 1-9999 2>&1|grep succeeded|grep 8085
-	#~ -curl -Is http://127.0.0.1:8085/
-	#~ curl -Is http://127.0.0.1:8085/|head -n 1|grep 200
+	#~ netcat -zv 127.0.0.1 1-9999 2>&1|grep succeeded|grep 8885
+	#~ -curl -Is http://127.0.0.1:8885/
+	#~ curl -Is http://127.0.0.1:8885/|head -n 1|grep 200
 	#~ cat /etc/passwd|grep git
 	@echo
 	@echo "Tests for ${MODULENAME} finished."
